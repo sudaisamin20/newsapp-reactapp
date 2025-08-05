@@ -43,24 +43,24 @@ const Navbar = () => {
         return word.charAt(0).toUpperCase() + word.slice(1, word.lenght)
     }
     return (
-        <div className={`flex items-center justify-between h-16 px-3 bg-black bg-opacity-70 text-white fixed w-full z-20`}>
+        <div className={`flex items-center justify-between h-16 px-3 bg-black bg-opacity-70 text-white fixed ${theme === "light" ? "bg-opacity-50" : "bg-opacity-20"} backdrop-blur-sm w-full z-20`}>
             <div>
-                <div className='text-3xl max-[400px]:text-2xl font-bold'>Get News</div>
+                <div className='text-3xl max-[400px]:text-2xl max-[210px]:text-[17px] font-bold relative z-20'>Get News</div>
             </div>
-            <ul className='lg:flex hidden'>
+            <ul className='lg:flex hidden largeDevice'>
                 <FaMoon size={25} className='cursor-pointer' onClick={toggleTheme} />
                 {categories.map((e) => {
                     return <li key={e.id} className='px-5'><Link to={e.category}>{capitalizeFirstLetter(e.category)}</Link></li>
                 })}
             </ul>
             <div className='lg:hidden z-10 flex'>
-                <FaMoon size={25} className='cursor-pointer' onClick={toggleTheme} />
+                <FaMoon size={25} className='cursor-pointer h-6 w-7 max-[210px]:h-4 max-[210px]:w-4' onClick={toggleTheme} />
                 <div className='cursor-pointer pl-4' onClick={() => { setNav(!nav) }}>
-                    {nav ? <FaTimes size={25} /> : <FaBars size={25} />}
+                    {nav ? <FaTimes className='h-6 w-7 max-[210px]:h-4 max-[210px]:w-4 ' /> : <FaBars className='h-6 w-7 max-[210px]:h-4 max-[210px]:w-4 ' />}
                 </div>
             </div>
             {nav &&
-                <ul className='flex flex-col pt-4 absolute h-screen w-full justify-center items-center top-0 left-0 bg-gradient-to-b from-gray-950 to-black text-white font-bold text-3xl'>
+                <ul className={`flex flex-col pt-4 absolute h-screen w-full justify-center items-center top-0 left-0 ${theme === "light" ? "bg-black bg-opacity-90" : "bg-gradient-to-b from-gray-950 to-black"} text-white font-bold text-3xl`}>
                     {/* <li className='py-4'><Link to="/About">About</Link></li> */}
                     {categories.map((e) => {
                         return <li key={e.id} className='py-4' onClick={() => setNav(!nav)}><Link to={e.category}>{capitalizeFirstLetter(e.category)}</Link></li>

@@ -8,14 +8,24 @@ export function ThemeProvider ({ children }) {
     const toggleTheme = () => {
         setTheme((prevTheme) => prevTheme === "light" ? "dark" : "light")
     }
+    // eslint-disable-next-line
+    const [location, setLocation] = useState("IN")
+
+    const updateLocation = (data) => {
+        setLocation(data)
+    }
 
     return (
-        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        <ThemeContext.Provider value={{ theme, toggleTheme, updateLocation, location }}>
             {children}
         </ThemeContext.Provider>
     )
 }
 
 export function useTheme() {
+    return useContext(ThemeContext)
+}
+
+export function useLocation() {
     return useContext(ThemeContext)
 }
